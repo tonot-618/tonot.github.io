@@ -1,0 +1,35 @@
+import React, { useState } from "react";
+
+const engToKorMap = {
+  r: "ㄱ", R: "ㄲ", s: "ㄴ", e: "ㄷ", E: "ㄸ", f: "ㄹ",
+  a: "ㅁ", q: "ㅂ", Q: "ㅃ", t: "ㅅ", T: "ㅆ", d: "ㅇ",
+  w: "ㅈ", W: "ㅉ", c: "ㅊ", z: "ㅋ", x: "ㅌ", v: "ㅍ",
+  g: "ㅎ", k: "ㅏ", o: "ㅐ", i: "ㅑ", O: "ㅒ", j: "ㅓ",
+  p: "ㅔ", u: "ㅕ", P: "ㅖ", h: "ㅗ", y: "ㅛ", n: "ㅜ",
+  b: "ㅠ", m: "ㅡ", l: "ㅣ",
+};
+
+function decode(text) {
+  return [...text].map((ch) => engToKorMap[ch] || ch).join("");
+}
+
+export default function DecoderApp() {
+  const [input, setInput] = useState("");
+  const decoded = decode(input);
+
+  return (
+    <div className="p-4 space-y-4 max-w-md mx-auto">
+      <h1 className="text-xl font-bold">한글 자판 복호화기</h1>
+      <input
+        type="text"
+        placeholder="영문 입력 (예: ajfl vns...)"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        className="w-full border rounded p-2 text-lg"
+      />
+      <div className="bg-gray-100 rounded p-4 text-lg">
+        <strong>변환 결과:</strong> {decoded}
+      </div>
+    </div>
+  );
+}
